@@ -46,6 +46,45 @@ export const testFile2 = {
   path: "A:/Documents/testFile2.txt",
 };
 
+export const testFile3 = {
+  name: "testFile3.txt",
+  content: "This is a test file.",
+  created: 1719375076000,
+  last_modified: 1719375076000,
+  size: 20,
+  type: "txt",
+  path: "A:/Desktop/testFile3.txt",
+};
+
+export const testFile4 = {
+  name: "testFile4.txt",
+  content: "This is a test file.",
+  created: 1719375076000,
+  last_modified: 1719375076000,
+  size: 20,
+  type: "txt",
+  path: "A:/testFile4.txt",
+};
+
+export const testDirectory1 = {
+  name: "Documents",
+  files: [testFile1, testFile2],
+  folders: [],
+  created: 1719375076000,
+  last_modified: 1719375076000,
+  size: 40,
+  path: "A:/",
+};
+
+export const testDirectory2 = {
+  name: "Desktop",
+  files: [testFile3],
+  folders: [],
+  created: 1719375076000,
+  last_modified: 1719375076000,
+  size: 20,
+};
+
 export const testSav = {
   settings: {
     theme: "A:/themes/golden_sunrise.json",
@@ -62,18 +101,8 @@ export const testSav = {
         size: 0, // 0 bytes
         path: "A:/",
         isRoot: true,
-        folders: [
-          {
-            name: "Documents",
-            created: 1719375076000,
-            last_modified: 1719375076000,
-            size: 0,
-            path: "A:/Documents",
-            folders: [],
-            files: [],
-          },
-        ],
-        files: [testFile1],
+        folders: [testDirectory1, testDirectory2],
+        files: [testFile4],
       },
     },
   ],
