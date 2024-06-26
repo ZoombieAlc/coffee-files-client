@@ -1,3 +1,5 @@
+import { Folder, Sav, TextFile, TypeFile } from "../types";
+
 export const testTheme = {
   name: "Golden Sunrise",
   colors: {
@@ -26,47 +28,47 @@ Amethyst Whisper - Light gray
 Violet Dream - Midnight Blue
 */
 
-export const testFile1 = {
+export const testFile1: TextFile = {
   name: "testFile1.txt",
   content: "This is a test file.",
   created: 1719375076000,
   last_modified: 1719375076000,
   size: 20,
-  type: "txt",
+  type: TypeFile.TXT,
   path: "A:/Documents/testFile1.txt",
 };
 
-export const testFile2 = {
+export const testFile2: TextFile = {
   name: "testFile2.txt",
   content: "This is a test file.",
   created: 1719375076000,
   last_modified: 1719375076000,
   size: 20,
-  type: "txt",
+  type: TypeFile.TXT,
   path: "A:/Documents/testFile2.txt",
 };
 
-export const testFile3 = {
+export const testFile3: TextFile = {
   name: "testFile3.txt",
   content: "This is a test file.",
   created: 1719375076000,
   last_modified: 1719375076000,
   size: 20,
-  type: "txt",
+  type: TypeFile.TXT,
   path: "A:/Desktop/testFile3.txt",
 };
 
-export const testFile4 = {
+export const testFile4: TextFile = {
   name: "testFile4.txt",
   content: "This is a test file.",
   created: 1719375076000,
   last_modified: 1719375076000,
   size: 20,
-  type: "txt",
+  type: TypeFile.TXT,
   path: "A:/testFile4.txt",
 };
 
-export const testDirectory1 = {
+export const testDirectory1: Folder = {
   name: "Documents",
   files: [testFile1, testFile2],
   folders: [],
@@ -74,18 +76,21 @@ export const testDirectory1 = {
   last_modified: 1719375076000,
   size: 40,
   path: "A:/",
+  isRoot: false,
 };
 
-export const testDirectory2 = {
+export const testDirectory2: Folder = {
   name: "Desktop",
   files: [testFile3],
   folders: [],
   created: 1719375076000,
   last_modified: 1719375076000,
   size: 20,
+  path: "A:/",
+  isRoot: false,
 };
 
-export const testSav = {
+export const testSav: Sav = {
   settings: {
     theme: "A:/themes/golden_sunrise.json",
   },
