@@ -1,19 +1,10 @@
-import "./App.css";
-import {
-  FolderIcon,
-  FolderOpenIcon,
-  ServerIcon,
-  TrashIcon,
-} from "@heroicons/react/16/solid";
+import ToolBar from "./components/organisms/toolBar";
 
 function App() {
   return (
     <>
+      <ToolBar />
       <p className="font-inter font-medium">Hola</p>
-      <TrashIcon className=" text-coffee_text_pale_blue" />
-      <FolderOpenIcon className="text-coffee_violet_dark" />
-      <FolderIcon className="text-coffee_violet_dark" />
-      <ServerIcon className=" text-coffee_violet_dark" />
     </>
   );
 }
