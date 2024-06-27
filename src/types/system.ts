@@ -1,6 +1,6 @@
 export enum TypeFile {
   TXT,
-  IMG,
+  JPG,
   JSON,
 }
 
@@ -17,7 +17,7 @@ export type GenericFile = {
 };
 
 export type FileImage = GenericFile & {
-  type: TypeFile.IMG;
+  type: TypeFile.JPG;
   src: string;
 };
 
@@ -35,14 +35,14 @@ export type Folder = {
   last_modified: number;
   size: number;
   path: Path;
-  isRoot: boolean;
+  is_root: boolean;
 };
 
-export type disk = {
+export type Disk = {
   name: string;
   root: Folder;
-  limitSize: number;
-  occupiedSize: number;
+  limit_size: number;
+  occupied_size: number;
 };
 
 export type SavSettings = {
@@ -51,5 +51,5 @@ export type SavSettings = {
 
 export type Sav = {
   settings: SavSettings;
-  disks: disk[];
+  disks: Disk[];
 };
