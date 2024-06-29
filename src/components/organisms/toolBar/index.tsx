@@ -12,9 +12,9 @@ import { ClipboardDocumentIcon } from "@heroicons/react/24/outline";
 
 function ToolBar() {
   return (
-    <div className="m-2 p-2 bg-coffee_violet_darker w-full flex flex-col rounded-md gap-1 font-inter text-coffee_text_pale_blue">
-      <div className="ml-4 p-2 font-medium text-sm flex flex-row justify-start w-4/5 gap-20">
-        <div className="flex flex-col items-center px-2">
+    <div className="m-2 p-2 bg-coffee_violet_darker  w-full flex flex-col rounded-md gap-1 font-inter h-1/6 text-coffee_text_pale_blue">
+      <div className="p-2 font-medium text-sm flex flex-row justify-around overflow-x-auto w-3/5">
+        <div className="flex flex-col items-center">
           <PlusIcon className="w-6" />
           <p>New</p>
         </div>
@@ -40,30 +40,31 @@ function ToolBar() {
         </div>
       </div>
 
-      <div className="flex px-2 flex-row justify-start gap-4">
-        <div className="flex gap-1">
-          <button>
+      <div className="flex flex-row justify-between items-center gap-4 px-2 mt-2">
+        <div className="flex gap-2">
+          <button className="p-1 rounded hover:bg-coffee_violet_light">
             <ArrowLeftIcon className="w-6" />
           </button>
-          <button>
+          <button className="p-1 rounded hover:bg-coffee_violet_light">
             <ArrowRightIcon className="w-6" />
           </button>
-          <button>
+          <button className="p-1 rounded hover:bg-coffee_violet_light">
             <ArrowPathIcon className="w-6" />
           </button>
         </div>
 
-        <div className="flex flex-row justify-around w-full items-center gap-4">
-          <div className="w-full bg-coffee_violet_light rounded-md px-2 py-1 items-center flex">
-            C:/Folder1/Subfolder1/
+        <div className="flex flex-grow items-center gap-7">
+          <div className="flex-grow bg-coffee_violet_light rounded-md px-2 py-1 flex items-center">
+            C:/Folder1/SubFolder1/
           </div>
           <input
-            placeholder="Search.."
-            className=" bg-coffee_violet_light rounded-md px-2 py-1 items-center flex"
-          ></input>
+            placeholder="Search..."
+            className="bg-coffee_violet_light rounded-md px-2 py-1 w-auto"
+          />
         </div>
       </div>
     </div>
   );
 }
+
 export default ToolBar;
