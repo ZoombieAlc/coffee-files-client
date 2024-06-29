@@ -76,7 +76,7 @@ export const testDirectory1: Folder = {
   last_modified: 1719375076000,
   size: 40,
   path: "A:/",
-  isRoot: false,
+  is_root: false,
 };
 
 export const testDirectory2: Folder = {
@@ -87,7 +87,7 @@ export const testDirectory2: Folder = {
   last_modified: 1719375076000,
   size: 20,
   path: "A:/",
-  isRoot: false,
+  is_root: false,
 };
 
 export const testSav: Sav = {
@@ -97,15 +97,15 @@ export const testSav: Sav = {
   disks: [
     {
       name: "A", // A-Z
-      limitSize: 1000000000000, // 1TB
-      occupiedSize: 32000000000, // 32GB
+      limit_size: 1000000000000, // 1TB
+      occupied_size: 32000000000, // 32GB
       root: {
         name: "root",
         created: 1719375076000, // Milliseconds epoch
         last_modified: 1719375076000, // Milliseconds epoch
         size: 0, // 0 bytes
         path: "A:/",
-        isRoot: true,
+        is_root: true,
         folders: [testDirectory1, testDirectory2],
         files: [testFile4],
       },
