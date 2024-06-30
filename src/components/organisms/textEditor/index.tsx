@@ -16,6 +16,10 @@ function TextEditor({ name, content, type, onSave }: TextEditorProps) {
     const lineCount = FileContent.split("\n").length;
     const newLineNumbers = Array.from({ length: lineCount }, (_, i) => i + 1);
     setLineNumbers(newLineNumbers);
+
+    document
+      .getElementById("editor")
+      ?.style.setProperty("height", `${textAreaRef.current?.scrollHeight}px`);
   }, [FileContent]);
 
   const handleSave = () => {
@@ -25,16 +29,17 @@ function TextEditor({ name, content, type, onSave }: TextEditorProps) {
   return (
     <div className="flex flex-col h-full p-4 bg-coffee_violet_dark rounded-xl">
       <div className="flex-grow flex bg-coffee_violet_darker rounded mb-2 overflow-y-auto">
-        <div className="flex flex-col items-end pr-2 pt-2 h-full bg-coffee_violet_darker text-coffee_text_pale_blue">
+        <div className="flex flex-col items-end pr-2 pt-2 h-max bg-coffee_violet_darker text-coffee_text_pale_blue font-mono">
           {lineNumbers.map((lineNumber) => (
-            <span key={lineNumber} className="pr-2 text-right">
+            <span key={lineNumber} className="pr-2 pl-1 text-right">
               {lineNumber}
             </span>
           ))}
         </div>
         <textarea
           ref={textAreaRef}
-          className="flex-grow bg-coffee_violet_darker text-coffee_text_pale_blue rounded p-2 overflow-hidden"
+          id="editor"
+          className="flex-grow bg-coffee_violet_darker text-coffee_text_pale_blue rounded p-2 overflow-hidden focus:outline-none"
           value={FileContent}
           onChange={(e) => setFileContent(e.target.value)}
           rows={20}
