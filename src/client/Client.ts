@@ -7,6 +7,11 @@ type RequestOptions = {
   data?: any;
 };
 
+type Options = {
+  url: string;
+  data?: any;
+};
+
 class Client {
   private api: AxiosInstance;
   private basePath: string;
@@ -28,9 +33,9 @@ class Client {
         ...headers,
         "Content-Type": "application/json",
       },
-      timeout: this.timeout,
-    };
+    }
   }
+  
 
   private handleResponse<T>(response: AxiosResponse<T>): T {
     return response.data;
@@ -97,6 +102,50 @@ class Client {
     }
   }
   
+
+  postFile(options: Options) {
+    let configOptions = {
+      ...options,
+      baseUrl: this.basePath,
+      timeout: this.timeout,
+    };
+
+    let path = this.basePath + options.url;
+
+    let headers = {
+      "Content-type": "application/json",
+    };
+
+    let config = {
+      ...configOptions,
+      headers: headers,
+      withCredentials: true,
+    };
+
+    return this.api.post(path, config.data, config);
+  }
+
+  uploadFile(options: Options) {
+    let configOptions = {
+      ...options,
+      baseUrl: this.basePath,
+      timeout: this.timeout,
+    };
+
+    let path = this.basePath + options.url;
+
+    let headers = {
+      "Content-type": "multipart/form-data",
+    };
+
+    let config = {
+      ...configOptions,
+      headers: headers,
+      withCredentials: true,
+    };
+
+    return this.api.post(path, config.data, config);
+  }
 }
 
 export default Client;

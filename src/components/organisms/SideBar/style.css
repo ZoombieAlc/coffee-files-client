@@ -1,0 +1,4 @@
+.bg-glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(5px);
+}

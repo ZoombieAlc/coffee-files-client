@@ -35,7 +35,7 @@ export const testFile1: TextFile = {
   last_modified: 1719375076000,
   size: 20,
   type: TypeFile.TXT,
-  path: "A:/Documents/testFile1.txt",
+  path: "A:\\Documents\\testFile1.txt",
 };
 
 export const testFile2: TextFile = {
@@ -45,7 +45,7 @@ export const testFile2: TextFile = {
   last_modified: 1719375076000,
   size: 20,
   type: TypeFile.TXT,
-  path: "A:/Documents/testFile2.txt",
+  path: "A:\\Documents\\testFile2.txt",
 };
 
 export const testFile3: TextFile = {
@@ -55,7 +55,7 @@ export const testFile3: TextFile = {
   last_modified: 1719375076000,
   size: 20,
   type: TypeFile.TXT,
-  path: "A:/Desktop/testFile3.txt",
+  path: "A:\\Desktop\\testFile3.txt",
 };
 
 export const testFile4: TextFile = {
@@ -65,7 +65,7 @@ export const testFile4: TextFile = {
   last_modified: 1719375076000,
   size: 20,
   type: TypeFile.TXT,
-  path: "A:/testFile4.txt",
+  path: "A:\\testFile4.txt",
 };
 
 export const testDirectory1: Folder = {
@@ -75,7 +75,7 @@ export const testDirectory1: Folder = {
   created: 1719375076000,
   last_modified: 1719375076000,
   size: 40,
-  path: "A:/",
+  path: "A:\\",
   is_root: false,
 };
 
@@ -86,13 +86,13 @@ export const testDirectory2: Folder = {
   created: 1719375076000,
   last_modified: 1719375076000,
   size: 20,
-  path: "A:/",
+  path: "A:\\",
   is_root: false,
 };
 
 export const testSav: Sav = {
   settings: {
-    theme: "A:/themes/golden_sunrise.json",
+    theme: "A:\\themes\\golden_sunrise.json",
   },
   disks: [
     {
@@ -104,7 +104,7 @@ export const testSav: Sav = {
         created: 1719375076000, // Milliseconds epoch
         last_modified: 1719375076000, // Milliseconds epoch
         size: 0, // 0 bytes
-        path: "A:/",
+        path: "A:\\",
         is_root: true,
         folders: [testDirectory1, testDirectory2],
         files: [testFile4],

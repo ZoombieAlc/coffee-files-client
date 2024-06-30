@@ -2,13 +2,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GlassButton from "../../atoms/glass_button";
 import { faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { useDropzone } from "react-dropzone";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
+import { loadFile } from "../../../client/System";
+import Loader from "../../atoms/loader";
 
 function LoadSavFileBtn() {
+  const [uploading, setUploading] = useState(false);
+
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (!acceptedFiles[0]) return;
 
-    console.log(acceptedFiles[0]);
+    setUploading(true);
+
+    loadFile(acceptedFiles[0])
+      .then((res) => {
+        setUploading((prev) => !prev);
+      })
+      .catch((err) => {
+        console.error(err);
+        setUploading((prev) => !prev);
+      });
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -28,12 +41,21 @@ function LoadSavFileBtn() {
       otherProps={getRootProps()}
     >
       <input {...getInputProps()} />
-      <div className="flex flex-col gap-8">
-        <FontAwesomeIcon icon={faFileArrowUp} className="text-white text-6xl" />
-        <span className={`${isDragActive ? "text-cyan-300" : ""}`}>
-          Load .sav File
-        </span>
-      </div>
+      {uploading ? (
+        <Loader text="Creating File System" />
+      ) : (
+        <div className="flex flex-col gap-8">
+          <FontAwesomeIcon
+            icon={faFileArrowUp}
+            className={`text-6xl ${
+              isDragActive ? "text-cyan-300" : "text-white"
+            }`}
+          />
+          <span className={`${isDragActive ? "text-cyan-300" : ""}`}>
+            Load .sav File
+          </span>
+        </div>
+      )}
     </GlassButton>
   );
 }
