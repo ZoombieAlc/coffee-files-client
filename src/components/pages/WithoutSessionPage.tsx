@@ -1,5 +1,5 @@
 import CreateFileSystemBtn from "../molecules/createFileSystemBtn";
-import LoadSavFile from "../molecules/loadSavFile";
+import LoadSavFileBtn from "../molecules/loadSavFileBtn";
 
 function WithoutSessionPage() {
   return (
@@ -16,11 +16,11 @@ function WithoutSessionPage() {
         </h1>
         <div className="w-1/2 flex justify-between">
           <CreateFileSystemBtn />
-          <LoadSavFile />
+          <LoadSavFileBtn />
         </div>
         <div className="text-gray-400 flex gap-1 text-sm">
           <span className="font-light">Made by</span>
-          <span className="font-bold">UTP students</span>
+          <span className="font-bold">Hackathon UTP+ Winners</span>
         </div>
       </div>
     </div>

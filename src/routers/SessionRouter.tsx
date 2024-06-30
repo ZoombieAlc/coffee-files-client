@@ -19,22 +19,6 @@ A(20000)[{}]:|<|directory<|other_directory<*file.js{Y29uc29sZS5sb2coJ0hlbGxvLCBX
     // append file to form data
     formData.append("file", blob);
 
-    // console.log(blob);
-    // console.log(file);
-
-    // fetch("http://localhost:8080/api/system/import", {
-    //   method: "POST",
-    //   body: formData,
-    // }).then((response) => {
-    //   if (response.ok) {
-    //     console.log("File loaded successfully.");
-    //     console.log(response.headers);
-    //     response.headers.getSetCookie().forEach((cookie) => {
-    //       document.cookie = cookie;
-    //     });
-    //   }
-    // });
-
     axios
       .postForm("http://localhost:8080/api/system/import", formData, {
         withCredentials: true,
@@ -42,19 +26,11 @@ A(20000)[{}]:|<|directory<|other_directory<*file.js{Y29uc29sZS5sb2coJ0hlbGxvLCBX
       .then((response) => {
         if (response.status === 200) {
           console.log("File loaded successfully.");
-
-          console.log(response.headers);
-          console.log(
-            response.headers?.get("set-cookie") ?? "No cookies found!"
-          );
-          response.headers["set-cookie"]?.forEach((cookie) => {
-            document.cookie = cookie;
-          });
         }
       });
   };
 
-  return isInSession() || true ? <>{children}</> : <WithoutSessionPage />;
+  return isInSession() ? <>{children}</> : <WithoutSessionPage />;
 }
 
 export default SessionRouter;
