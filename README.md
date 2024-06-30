@@ -2,7 +2,7 @@
 
 <div align="center" width="320px">
 
-![the_cups_of_coffee_logo](./assets/the_cups_of_coffee_logo.png)
+![the_cups_of_coffee_logo](./src/assets/images/the_cups_of_coffee_logo.png)
 
 </div>
 
