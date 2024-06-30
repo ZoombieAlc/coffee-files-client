@@ -42,6 +42,7 @@ import {
   faFolderOpen,
 } from "@fortawesome/free-solid-svg-icons";
 import FileComponent from "./FileComponent";
+import { joinPath } from "../../../utils";
 
 function FolderComponent({ folder }: { folder: Folder }) {
   const [expanded, setExpanded] = useState(false);
@@ -69,10 +70,13 @@ function FolderComponent({ folder }: { folder: Folder }) {
         {expanded && (
           <div className="flex flex-col">
             {folder.folders.map((folderIn) => (
-              <FolderComponent folder={folderIn} />
+              <FolderComponent
+                folder={folderIn}
+                key={joinPath(folderIn.path, folderIn.name)}
+              />
             ))}
             {folder.files.map((file) => (
-              <FileComponent file={file} />
+              <FileComponent file={file} key={file.path} />
             ))}
           </div>
         )}

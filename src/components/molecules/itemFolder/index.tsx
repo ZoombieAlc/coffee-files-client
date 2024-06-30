@@ -1,6 +1,7 @@
 import { FolderIcon } from "@heroicons/react/16/solid";
 import { Folder } from "../../../types";
 import { useDroppable } from "@dnd-kit/core";
+import { joinPath } from "../../../utils";
 
 type ItemFolderProps = {
   item: Folder;
@@ -15,7 +16,7 @@ const formatDate = (timestamp: number) => {
 
 function ItemFolder({ item, isSelected, onClick }: ItemFolderProps) {
   const { isOver, setNodeRef } = useDroppable({
-    id: item.path + item.name,
+    id: joinPath(item.path, item.name),
   });
 
   return (
@@ -24,7 +25,7 @@ function ItemFolder({ item, isSelected, onClick }: ItemFolderProps) {
       className={`grid grid-cols-4 items-center p-2 rounded-md m-1 hover:bg-coffee_violet_light/70 ${
         isSelected ? "bg-coffee_violet_light/30" : ""
       } ${isOver ? "bg-coffee_text_pale_blue/30" : ""} selectable`}
-      data-id={item.path + item.name}
+      data-id={joinPath(item.path, item.name)}
       onClick={(e) => onClick(e, item.path)}
     >
       <div className="flex items-center">
