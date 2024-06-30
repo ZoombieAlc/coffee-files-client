@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState} from "react";
 import { File, Folder } from "../types";
 
 type SelectedFileType = {

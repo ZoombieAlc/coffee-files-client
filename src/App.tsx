@@ -1,21 +1,25 @@
+import { FileProvider } from "./contexts/FileContext";
 import ItemPanel from "./components/organisms/itemPanel";
 import ToolBar from "./components/organisms/toolBar";
-import MainRouter from "./routers";
+import Sidebar from "./components/organisms/SideBar/SideBar";
 
 function App() {
   return (
-    <>
-      <MainRouter>
-        {/* <div className="flex h-screen w-screen bg-wallpaper1">
-        <div className="bg-white-100 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-0 border border-coffee_violet_dark h-screen w-96 mx-1 my-2"></div>
-        <div className="flex flex-col w-full">
+    <FileProvider>
+      <div className="flex h-screen w-screen bg-wallpaper1">
+        <div className="relative w-[18%] overflow-y-auto">
+          <div className="absolute inset-0 backdrop-blur-md rounded-md"></div>
+          <div className="relative z-10 p-4">
+            <Sidebar />
+          </div>
+        </div>
+
+        <div className="flex-1 flex flex-col">
           <ToolBar />
           <ItemPanel />
         </div>
-      </div> */}
-        <div></div>
-      </MainRouter>
-    </>
+      </div>
+    </FileProvider>
   );
 }
 
