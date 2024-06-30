@@ -1,117 +1,102 @@
-import api from "axios";
+import axios, { AxiosInstance, AxiosResponse, AxiosError } from "axios";
 import { apiURL } from "../configs";
 
-type Options = {
+type RequestOptions = {
   url: string;
+  params?: Record<string, any>;
   data?: any;
 };
 
 class Client {
-  authorization: string;
-  basePath: string;
-  api: any;
-  timeout: number;
+  private api: AxiosInstance;
+  private basePath: string;
+  private timeout: number;
 
   constructor() {
-    this.authorization = localStorage.getItem("token") || "";
-    if (!this.authorization.startsWith("Bearer ")) {
-      this.authorization = "Bearer " + this.authorization;
-    }
-
     this.basePath = apiURL;
-
-    this.api = api.create({
+    this.api = axios.create({
       baseURL: this.basePath,
+      withCredentials: true,
     });
-
-    this.timeout = 180000; // prettier-ignore
+    this.timeout = 180000;
   }
-  getAuth(options: Options) {
-    let configOptions = {
-      ...options,
-      baseUrl: this.basePath,
+
+  private createRequestConfig(headers: Record<string, string> = {}) {
+    return {
+      baseURL: this.basePath,
+      headers: {
+        ...headers,
+        "Content-Type": "application/json",
+      },
       timeout: this.timeout,
     };
-
-    let path = this.basePath + options.url;
-
-    let headers = {
-      Authorization: this.authorization,
-      "Content-type": "application/json",
-    };
-
-    let config = {
-      ...configOptions,
-      headers: headers,
-    };
-
-    return api.get(path, config);
   }
 
-  putAuth(options: Options) {
-    let configOptions = {
-      ...options,
-      baseUrl: this.basePath,
-      timeout: this.timeout,
-    };
-
-    let path = this.basePath + options.url;
-
-    let headers = {
-      Authorization: this.authorization,
-      "Content-type": "application/json",
-    };
-
-    let config = {
-      ...configOptions,
-      headers: headers,
-    };
-
-    return api.put(path, config.data, config);
+  private handleResponse<T>(response: AxiosResponse<T>): T {
+    return response.data;
   }
 
-  postAuth(options: Options) {
-    let configOptions = {
-      ...options,
-      baseUrl: this.basePath,
-      timeout: this.timeout,
-    };
-
-    let path = this.basePath + options.url;
-
-    let headers = {
-      Authorization: this.authorization,
-      "Content-type": "application/json",
-    };
-
-    let config = {
-      ...configOptions,
-      headers: headers,
-    };
-
-    return api.post(path, config.data, config);
+  private handleError(error: AxiosError): never {
+    if (error.response) {
+      throw error.response.data;
+    } else if (error.request) {
+      throw new Error("No response received from server");
+    } else {
+      throw new Error("Request setup error: " + error.message);
+    }
   }
 
-  post(options: Options) {
-    let configOptions = {
-      ...options,
-      baseUrl: this.basePath,
-      timeout: this.timeout,
-    };
-
-    let path = this.basePath + options.url;
-
-    let headers = {
-      "Content-type": "application/json",
-    };
-
-    let config = {
-      ...configOptions,
-      headers: headers,
-    };
-
-    return api.post(path, config.data, config);
+  async get<T>({ url, params }: RequestOptions): Promise<T> {
+    try {
+      const response = await this.api.get<T>(url, {
+        ...this.createRequestConfig(),
+        params,
+      });
+      return this.handleResponse<T>(response);
+    } catch (error) {
+      this.handleError(error as AxiosError);
+    }
   }
+
+  async post<T>({ url, data }: RequestOptions): Promise<T> {
+    try {
+      const response = await this.api.post<T>(url, data, this.createRequestConfig());
+      return this.handleResponse<T>(response);
+    } catch (error) {
+      this.handleError(error as AxiosError);
+    }
+  }
+
+  async put<T>({ url, data }: RequestOptions): Promise<T> {
+    try {
+      const response = await this.api.put<T>(url, data, this.createRequestConfig());
+      return this.handleResponse<T>(response);
+    } catch (error) {
+      this.handleError(error as AxiosError);
+    }
+  }
+
+  async delete<T>({ url, params }: RequestOptions): Promise<T> {
+    try {
+      const response = await this.api.delete<T>(url, {
+        ...this.createRequestConfig(),
+        params,
+      });
+      return this.handleResponse<T>(response);
+    } catch (error) {
+      this.handleError(error as AxiosError);
+    }
+  }
+
+  async patch<T>({ url, data }: RequestOptions): Promise<T> {
+    try {
+      const response = await this.api.patch<T>(url, data, this.createRequestConfig());
+      return this.handleResponse<T>(response);
+    } catch (error) {
+      this.handleError(error as AxiosError);
+    }
+  }
+  
 }
 
 export default Client;
