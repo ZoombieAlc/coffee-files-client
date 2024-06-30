@@ -26,7 +26,8 @@ class Client {
 
     this.timeout = 180000; // prettier-ignore
   }
-  getAuth(options: Options) {
+
+  get(options: Options) {
     let configOptions = {
       ...options,
       baseUrl: this.basePath,
@@ -43,53 +44,10 @@ class Client {
     let config = {
       ...configOptions,
       headers: headers,
+      withCredentials: true,
     };
 
     return api.get(path, config);
-  }
-
-  putAuth(options: Options) {
-    let configOptions = {
-      ...options,
-      baseUrl: this.basePath,
-      timeout: this.timeout,
-    };
-
-    let path = this.basePath + options.url;
-
-    let headers = {
-      Authorization: this.authorization,
-      "Content-type": "application/json",
-    };
-
-    let config = {
-      ...configOptions,
-      headers: headers,
-    };
-
-    return api.put(path, config.data, config);
-  }
-
-  postAuth(options: Options) {
-    let configOptions = {
-      ...options,
-      baseUrl: this.basePath,
-      timeout: this.timeout,
-    };
-
-    let path = this.basePath + options.url;
-
-    let headers = {
-      Authorization: this.authorization,
-      "Content-type": "application/json",
-    };
-
-    let config = {
-      ...configOptions,
-      headers: headers,
-    };
-
-    return api.post(path, config.data, config);
   }
 
   post(options: Options) {
@@ -108,6 +66,29 @@ class Client {
     let config = {
       ...configOptions,
       headers: headers,
+      withCredentials: true,
+    };
+
+    return api.post(path, config.data, config);
+  }
+
+  uploadFile(options: Options) {
+    let configOptions = {
+      ...options,
+      baseUrl: this.basePath,
+      timeout: this.timeout,
+    };
+
+    let path = this.basePath + options.url;
+
+    let headers = {
+      "Content-type": "multipart/form-data",
+    };
+
+    let config = {
+      ...configOptions,
+      headers: headers,
+      withCredentials: true,
     };
 
     return api.post(path, config.data, config);
