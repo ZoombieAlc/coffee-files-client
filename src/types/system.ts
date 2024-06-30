@@ -27,9 +27,18 @@ export type TextFile = GenericFile & {
 
 export type File = GenericFile | FileImage | TextFile;
 
+export type FileStructure = {
+  name: string;
+  created: number;
+  last_modified: number;
+  size: number;
+  type: TypeFile;
+  path: Path;
+};
+
 export type Folder = {
   name: string;
-  files: File[];
+  files: FileStructure[];
   folders: Folder[];
   created: number;
   last_modified: number;

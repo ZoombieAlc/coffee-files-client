@@ -9,6 +9,8 @@ export default {
         coffee_violet_darker: "#232245",
         coffee_green_aqua: "#00AAAA",
         coffee_text_pale_blue: "#B3EBF1",
+        theme_text_primary: "#2E2B55",
+        theme_text_secundary: "#7448AF",
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
