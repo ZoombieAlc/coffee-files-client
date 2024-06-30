@@ -1,3 +1,6 @@
+import { useCookies } from "react-cookie";
+
 export function isInSession() {
-  return document.cookie.includes("JSESSIONID");
+  const [cookies] = useCookies(["JSESSIONID"]);
+  return cookies.JSESSIONID !== undefined;
 }
