@@ -2,9 +2,7 @@ import { FileProvider } from "./contexts/FileContext";
 import ItemPanel from "./components/organisms/itemPanel";
 import TextEditor from "./components/organisms/textEditor";
 import ToolBar from "./components/organisms/toolBar";
-import { testFile1 } from "./constants";
 import Sidebar from "./components/organisms/SideBar/SideBar";
-      
 
 function App() {
   return (
@@ -19,13 +17,14 @@ function App() {
 
         <div className="flex-1 flex flex-col">
           <ToolBar />
-          <div className="h-5/6 overflow-hidden">
+          <ItemPanel />
+          {/*<div className="h-5/6 overflow-hidden">
             <TextEditor
               name={testFile1.name}
               content={testFile1.content}
               type="txt"
             />
-          </div>
+          </div>*/}
         </div>
       </div>
     </FileProvider>
