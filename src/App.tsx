@@ -4,8 +4,8 @@ import ToolBar from "./components/organisms/toolBar";
 function App() {
   return (
     <>
-      <div className="flex h-screen bg-wallpaper1">
-        <div className="isolate aspect-video rounded-xl bg-white/20 shadow-lg ring-1 ring-black/5 h-screen w-96"></div>
+      <div className="flex h-screen w-screen bg-wallpaper1">
+        <div className="bg-white-100 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-0 border border-coffee_violet_dark h-screen w-96 mx-1 my-2"></div>
         <div className="flex flex-col w-full">
           <ToolBar />
           <ItemPanel />
