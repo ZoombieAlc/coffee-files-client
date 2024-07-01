@@ -9,8 +9,8 @@ export type Path = string;
 export type GenericFile = {
   name: string;
   content: string;
-  created: number;
-  last_modified: number;
+  created_at: number;
+  last_modified_at: number;
   size: number;
   type: TypeFile;
   path: Path;
@@ -29,8 +29,8 @@ export type File = GenericFile | FileImage | TextFile;
 
 export type FileStructure = {
   name: string;
-  created: number;
-  last_modified: number;
+  created_at: number;
+  last_modified_at: number;
   size: number;
   type: TypeFile;
   path: Path;
@@ -40,8 +40,8 @@ export type Folder = {
   name: string;
   files: FileStructure[];
   folders: Folder[];
-  created: number;
-  last_modified: number;
+  created_at: number;
+  last_modified_at: number;
   size: number;
   path: Path;
   root: boolean;

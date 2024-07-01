@@ -1,18 +1,13 @@
 import { FolderIcon } from "@heroicons/react/16/solid";
 import { Folder } from "../../../types";
 import { useDroppable } from "@dnd-kit/core";
-import { joinPath } from "../../../utils";
+import { formatDate, formatSize, joinPath } from "../../../utils";
 import useSavFile from "../../../hooks/useSavFile";
 
 type ItemFolderProps = {
   item: Folder;
   isSelected: boolean;
   onClick: (e: React.MouseEvent, path: string) => void;
-};
-
-const formatDate = (timestamp: number) => {
-  const date = new Date(timestamp);
-  return date.toLocaleDateString();
 };
 
 function ItemFolder({ item, isSelected, onClick }: ItemFolderProps) {
@@ -42,12 +37,14 @@ function ItemFolder({ item, isSelected, onClick }: ItemFolderProps) {
         </p>
       </div>
       <p className="text-sm text-coffee_text_pale_blue">
-        {formatDate(item.last_modified)}
+        {formatDate(item.last_modified_at)}
       </p>
       <p className="text-sm text-coffee_text_pale_blue">
-        {formatDate(item.created)}
+        {formatDate(item.created_at)}
       </p>
-      <p className="text-sm text-coffee_text_pale_blue">{item.size} bytes</p>
+      <p className="text-sm text-coffee_text_pale_blue">
+        {formatSize(item.size)}
+      </p>
     </div>
   );
 }

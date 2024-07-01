@@ -5,6 +5,7 @@ import {
 } from "@heroicons/react/16/solid";
 import { FileStructure, TypeFile } from "../../../types";
 import { useDraggable } from "@dnd-kit/core";
+import { formatDate, formatSize } from "../../../utils";
 
 type ItemFileProps = {
   item: FileStructure;
@@ -16,11 +17,6 @@ const fileIcons = {
   [TypeFile.TXT]: DocumentTextIcon,
   [TypeFile.JPG]: PhotoIcon,
   [TypeFile.JSON]: DocumentIcon,
-};
-
-const formatDate = (timestamp: number) => {
-  const date = new Date(timestamp);
-  return date.toLocaleDateString();
 };
 
 function ItemFile({ item, isSelected, onClick }: ItemFileProps) {
@@ -57,12 +53,14 @@ function ItemFile({ item, isSelected, onClick }: ItemFileProps) {
         </div>
       </button>
       <p className="text-sm text-coffee_text_pale_blue">
-        {formatDate(item.last_modified)}
+        {formatDate(item.last_modified_at)}
       </p>
       <p className="text-sm text-coffee_text_pale_blue">
-        {formatDate(item.created)}
+        {formatDate(item.created_at)}
       </p>
-      <p className="text-sm text-coffee_text_pale_blue">{item.size} bytes</p>
+      <p className="text-sm text-coffee_text_pale_blue">
+        {formatSize(item.size)}
+      </p>
     </div>
   );
 }

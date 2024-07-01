@@ -16,7 +16,7 @@ function SideBar() {
         <h2 className="text-white text-xl font-inter font-bold">
           Coffee Files
         </h2>
-        <div className="flex-1 w-full overflow-auto pl-2 bg-yellow-500">
+        <div className="flex-1 w-full overflow-auto pl-2">
           {sav.disks.map((disk) => (
             <FolderComponent key={disk.name} folder={disk.root} />
           ))}
