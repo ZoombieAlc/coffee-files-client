@@ -28,7 +28,7 @@ function App() {
             </div>
           </div>
           </ClipboardProvider>
-          </FileProvider>
+        </FileProvider>
     </MainRouter>
   );
 }

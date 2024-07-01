@@ -1,6 +1,5 @@
 import {
   ArrowPathIcon,
-  ArrowRightIcon,
   ArrowUpIcon,
   DocumentDuplicateIcon,
   PlusIcon,
@@ -10,10 +9,18 @@ import {
 import { PencilIcon } from "@heroicons/react/24/outline";
 import { ClipboardDocumentIcon } from "@heroicons/react/24/outline";
 import useSavFile from "../../../hooks/useSavFile";
-
+import { useClipboardContext } from "../../../contexts";
 
 function ToolBar() {
   const { currentFolder, syncSystem, navigateTo } = useSavFile();
+  const {
+    clipboardFiles,
+    clipboardFolders,
+    copyFilesAndFolders,
+    cutFilesAndFolders,
+    pasteFilesAndFolders,
+    isCut,
+  } = useClipboardContext();
 
   const handleSync = () => {
     syncSystem();
@@ -24,6 +31,17 @@ function ToolBar() {
     navigateTo(currentFolder?.path.split("\\").slice(0, -1).join("\\") ?? "");
   };
 
+  const handleCopy = () => {
+    copyFilesAndFolders(clipboardFiles, clipboardFolders);
+  };
+
+  const handleCut = () => {
+    cutFilesAndFolders(clipboardFiles, clipboardFolders);
+  };
+
+  const handlePaste = () => {
+    pasteFilesAndFolders();
+  };
 
   return (
     <div className="m-2 p-2 bg-coffee_violet_darker w-full flex flex-col rounded-md gap-2 font-inter text-coffee_text_pale_blue">
@@ -40,19 +58,19 @@ function ToolBar() {
             <p>Delete</p>
           </div>
         </button>
-        <button >
+        <button onClick={handleCopy}>
           <div className="flex flex-col items-center">
             <DocumentDuplicateIcon className="w-6" />
             <p>Copy</p>
           </div>
         </button>
-        <button >
+        <button onClick={handleCut}>
           <div className="flex flex-col items-center">
             <ScissorsIcon className="w-6" />
             <p>Cut</p>
           </div>
         </button>
-        <button >
+        <button onClick={handlePaste}>
           <div className="flex flex-col items-center">
             <ClipboardDocumentIcon className="w-6" />
             <p>Paste</p>
