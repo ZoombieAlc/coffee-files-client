@@ -26,3 +26,11 @@ export function syncSystem(): Promise<{ system: Sav }> {
     url: "/api/system/sync",
   });
 }
+
+export function exportSystem(): Promise<ArrayBuffer> {
+  const api = new Client();
+
+  return api.get({
+    url: "/api/system/export",
+  });
+}

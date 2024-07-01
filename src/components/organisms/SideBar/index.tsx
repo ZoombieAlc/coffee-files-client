@@ -1,4 +1,6 @@
 import useSavFile from "../../../hooks/useSavFile";
+import CloseSession from "../../molecules/closeSessionBtn";
+import ExportSystemBtn from "../../molecules/exportSystemBtn";
 import FolderComponent from "./FolderComponent";
 
 import "./style.css";
@@ -14,10 +16,14 @@ function SideBar() {
         <h2 className="text-white text-xl font-inter font-bold">
           Coffee Files
         </h2>
-        <div className="flex-1 w-full overflow-auto pl-2">
+        <div className="flex-1 w-full overflow-auto pl-2 bg-yellow-500">
           {sav.disks.map((disk) => (
             <FolderComponent key={disk.name} folder={disk.root} />
           ))}
+        </div>
+        <div className="h-14 flex gap-2 justify-between w-full px-4 pt-2">
+          <CloseSession />
+          <ExportSystemBtn />
         </div>
       </div>
     </div>
