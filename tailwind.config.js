@@ -16,7 +16,7 @@ export default {
         inter: ["Inter", "sans-serif"],
       },
       backgroundImage: {
-        wallpaper1: "url('src/assets/images/wallpaper1.jpg')",
+        wallpaper1: "url('/images/golden_sunrise.jpg')",
       },
     },
   },
