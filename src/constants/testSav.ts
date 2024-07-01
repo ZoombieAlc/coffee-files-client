@@ -76,7 +76,7 @@ export const testDirectory1: Folder = {
   last_modified: 1719375076000,
   size: 40,
   path: "A:\\",
-  is_root: false,
+  root: false,
 };
 
 export const testDirectory2: Folder = {
@@ -87,7 +87,7 @@ export const testDirectory2: Folder = {
   last_modified: 1719375076000,
   size: 20,
   path: "A:\\",
-  is_root: false,
+  root: false,
 };
 
 export const testSav: Sav = {
@@ -105,7 +105,7 @@ export const testSav: Sav = {
         last_modified: 1719375076000, // Milliseconds epoch
         size: 0, // 0 bytes
         path: "A:\\",
-        is_root: true,
+        root: true,
         folders: [testDirectory1, testDirectory2],
         files: [testFile4],
       },

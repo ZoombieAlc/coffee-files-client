@@ -44,7 +44,7 @@ export type Folder = {
   last_modified: number;
   size: number;
   path: Path;
-  is_root: boolean;
+  root: boolean;
 };
 
 export type Disk = {

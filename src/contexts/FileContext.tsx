@@ -1,75 +1,79 @@
-import React, { createContext, useContext, useState } from 'react';
-import { testSav } from '../constants';
-import { Folder, Disk } from '../types';
+import React, { createContext, useContext, useState } from "react";
+import { testSav } from "../constants";
+import { Folder, Sav } from "../types";
+import { getDiskFrom } from "../utils";
 
 interface FileContextType {
-    currentFolder: Folder | null;
-    selectedDisk: Disk | null;
-    navigateTo: (path: string) => void;
-    expandedFolders: string[];
-    toggleFolder: (path: string) => void;
-  }
+  currentFolder: Folder | null;
+  sav: Sav | null;
+  setSav: (sav: Sav) => void;
+  navigateTo: (path: string) => void;
+}
 
 const FileContext = createContext<FileContextType | undefined>(undefined);
 
 interface FileProviderProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 export const FileProvider: React.FC<FileProviderProps> = ({ children }) => {
-    const [currentFolder, setCurrentFolder] = useState<Folder | null>(testSav.disks[0].root); 
-    const [selectedDisk, setSelectedDisk] = useState<Disk | null>(testSav.disks[0]);
-    const [expandedFolders, setExpandedFolders] = useState<string[]>([]);
+  const [sav, setSav] = useState<Sav | null>(null);
+  const [currentFolder, setCurrentFolder] = useState<Folder | null>(null);
 
-    const navigateTo = (path: string) => {
-        const parts = path.split(':');
-        const diskName = parts[0];
-        const folderPath = parts[1];
-    
-        const disk = selectedDisk;
-        if (disk) {
-          const findFolder = (folder: Folder, path: string): Folder | null => {
-            if (folder.path === path) {
-              return folder;
-            }
-            for (const subFolder of folder.folders) {
-              const result = findFolder(subFolder, path);
-              if (result) {
-                return result;
-              }
-            }
-            return null;
-          };
-    
-          const newFolder = findFolder(disk.root, folderPath);
-          if (newFolder) {
-            setCurrentFolder(newFolder);
-          }
-        }
-      };
+  const navigateTo = (path: string) => {
+    if (!sav) return;
 
-      const toggleFolder = (path: string) => {
-        setExpandedFolders(prevExpandedFolders => {
-          if (prevExpandedFolders.includes(path)) {
-            return prevExpandedFolders.filter(p => p !== path);
-          } else {
-            return [...prevExpandedFolders, path];
-          }
-        });
-      };
-            
-    
-      return (
-        <FileContext.Provider value={{ currentFolder, selectedDisk, navigateTo, expandedFolders, toggleFolder }}>
-            {children}
-        </FileContext.Provider>
+    const folderRoute = path.split("\\");
+
+    if (path.length >= 1) return;
+
+    const disk = getDiskFrom(folderRoute.shift() ?? "", sav);
+
+    if (!disk) return;
+
+    let focusedFolder = disk.root;
+
+    while (folderRoute.length > 0) {
+      const folderName = folderRoute.shift() ?? "";
+      const nextFolder = focusedFolder.folders.find(
+        (folder) => folder.name === folderName
       );
-    };
+
+      if (!nextFolder) {
+        setCurrentFolder(focusedFolder);
+        return;
+      }
+
+      focusedFolder = nextFolder;
+    }
+
+    setCurrentFolder(focusedFolder);
+
+    return;
+  };
+
+  const handleSetSav = (sav: Sav) => {
+    setSav(sav);
+  };
+
+  return (
+    <FileContext.Provider
+      value={{
+        currentFolder,
+        sav,
+        navigateTo,
+        setSav: handleSetSav,
+      }}
+    >
+      {children}
+    </FileContext.Provider>
+  );
+};
 
 export const useFileContext = () => {
   const context = useContext(FileContext);
   if (!context) {
-    throw new Error('useFileContext must be used within a FileProvider');
+    throw new Error("useFileContext must be used within a FileProvider");
   }
   return context;
 };

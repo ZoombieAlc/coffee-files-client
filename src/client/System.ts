@@ -1,4 +1,5 @@
 import Client from "./Client";
+import { Sav } from "../types";
 
 export function loadFile(file: File) {
   const api = new Client();
@@ -12,9 +13,16 @@ export function loadFile(file: File) {
   });
 }
 
-export function createSystem() {
+export function createSystem(): Promise<{ system: Sav }> {
   const api = new Client();
   return api.post({
     url: "/api/system/create",
+  });
+}
+
+export function syncSystem(): Promise<{ system: Sav }> {
+  const api = new Client();
+  return api.get({
+    url: "/api/system/sync",
   });
 }
