@@ -4,7 +4,6 @@ import TextEditor from "./components/organisms/textEditor";
 import ToolBar from "./components/organisms/toolBar";
 import Sidebar from "./components/organisms/SideBar";
 import MainRouter from "./routers";
-import { testSav } from "./constants";
 
 function App() {
   return (
@@ -12,7 +11,7 @@ function App() {
       <FileProvider>
         <div className="flex h-screen w-screen bg-wallpaper1">
           <div className="relative w-[18%] overflow-y-auto">
-            <Sidebar savSystem={testSav} />
+            <Sidebar />
           </div>
 
           <div className="flex-1 flex flex-col">

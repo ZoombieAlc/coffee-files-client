@@ -6,8 +6,6 @@ import "./style.css";
 function SideBar() {
   const { sav } = useSavFile();
 
-  console.log(sav);
-
   if (!sav) return null;
 
   return (

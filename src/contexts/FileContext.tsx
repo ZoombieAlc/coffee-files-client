@@ -24,7 +24,7 @@ export const FileProvider: React.FC<FileProviderProps> = ({ children }) => {
 
     const folderRoute = path.split("\\");
 
-    if (path.length >= 1) return;
+    if (folderRoute.length < 1) return;
 
     const disk = getDiskFrom(folderRoute.shift() ?? "", sav);
 

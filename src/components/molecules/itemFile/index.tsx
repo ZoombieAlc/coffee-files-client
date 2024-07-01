@@ -3,11 +3,11 @@ import {
   DocumentTextIcon,
   PhotoIcon,
 } from "@heroicons/react/16/solid";
-import { GenericFile, TypeFile } from "../../../types";
+import { FileStructure, TypeFile } from "../../../types";
 import { useDraggable } from "@dnd-kit/core";
 
 type ItemFileProps = {
-  item: GenericFile;
+  item: FileStructure;
   isSelected: boolean;
   onClick: (e: React.MouseEvent, path: string) => void;
 };
@@ -34,7 +34,7 @@ function ItemFile({ item, isSelected, onClick }: ItemFileProps) {
       }
     : undefined;
 
-  const IconComponent = fileIcons[item.type];
+  const IconComponent = fileIcons[item.type] ?? DocumentTextIcon;
 
   return (
     <div

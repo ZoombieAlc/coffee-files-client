@@ -7,16 +7,19 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import FileComponent from "./FileComponent";
 import { joinPath } from "../../../utils";
+import useSavFile from "../../../hooks/useSavFile";
 
 function FolderComponent({ folder }: { folder: Folder }) {
   const [expanded, setExpanded] = useState(false);
+  const { navigateTo } = useSavFile();
 
   const handleExpand = () => {
     setExpanded(!expanded);
   };
 
   const handleSelect = () => {
-    console.log("Selected ");
+    navigateTo(folder.path);
+    console.log(folder.path);
   };
 
   return (

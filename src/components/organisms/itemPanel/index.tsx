@@ -1,14 +1,5 @@
 import { useSelectionContainer } from "@air/react-drag-to-select";
 import { useState } from "react";
-import {
-  testDirectory1,
-  testDirectory2,
-  testFile1,
-  testFile2,
-  testFile3,
-  testFile4,
-} from "../../../constants";
-import { Folder, GenericFile } from "../../../types";
 
 import ItemFolder from "../../molecules/itemFolder";
 import ItemFile from "../../molecules/itemFile";
@@ -18,10 +9,14 @@ import {
   DragOverlay,
   DragStartEvent,
 } from "@dnd-kit/core";
+import useSavFile from "../../../hooks/useSavFile";
 
 function ItemPanel() {
-  const files: GenericFile[] = [testFile1, testFile2, testFile3, testFile4];
-  const folders: Folder[] = [testDirectory1, testDirectory2];
+  const { currentFolder } = useSavFile();
+
+  const folders = currentFolder?.folders || [];
+  const files = currentFolder?.files || [];
+
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const [draggingItems, setDraggingItems] = useState<string[]>([]);
@@ -60,7 +55,7 @@ function ItemPanel() {
   };
 
   const handleDragStart = (event: DragStartEvent) => {
-    const draggedItemId = event.active.id.toString(); 
+    const draggedItemId = event.active.id.toString();
     setIsDragging(true);
     if (!selectedItems.includes(draggedItemId)) {
       setSelectedItems([draggedItemId]);
@@ -73,10 +68,9 @@ function ItemPanel() {
   const handleDragEnd = (event: DragEndEvent) => {
     const { over } = event;
     if (over) {
-      const overId = over.id.toString(); 
-      
+      const overId = over.id.toString();
+
       console.log(`Mover ${draggingItems.join(", ")} a ${overId}`);
-      
     }
     setIsDragging(false);
     setDraggingItems([]);
