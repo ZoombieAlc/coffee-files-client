@@ -20,17 +20,22 @@ function FolderComponent({ folder }: { folder: Folder }) {
   };
 
   return (
-    <div className="flex gap-1 group">
-      <div onClick={handleExpand}>
-        <FontAwesomeIcon
-          icon={expanded ? faFolderOpen : faFolderClosed}
-          className="w-4 h-4 text-theme_text_secundary"
-        />
-      </div>
-      <div className="flex flex-col cursor-pointer" onClick={handleSelect}>
-        <div className="font-bold text-theme_text_primary">
+    <div className="flex flex-col gap-1">
+      <div className="flex gap-1 hover:bg-[rgba(255,255,255,.1)] rounded-sm px-[1px] transition-colors">
+        <div onClick={handleExpand}>
+          <FontAwesomeIcon
+            icon={expanded ? faFolderOpen : faFolderClosed}
+            className="w-4 h-4 text-theme_text_secundary"
+          />
+        </div>
+        <div
+          className="font-bold text-theme_text_primary cursor-pointer"
+          onClick={handleSelect}
+        >
           {folder.root ? folder.path : folder.name}
         </div>
+      </div>
+      <div className="flex flex-col pl-4">
         {expanded && (
           <div className="flex flex-col">
             {folder.folders.map((folderIn) => (
