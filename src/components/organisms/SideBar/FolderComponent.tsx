@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Folder } from "../../../types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,12 +10,16 @@ import { joinPath } from "../../../utils";
 import useSavFile from "../../../hooks/useSavFile";
 
 function FolderComponent({ folder }: { folder: Folder }) {
+  const { navigateTo, currentFolder } = useSavFile();
   const [expanded, setExpanded] = useState(false);
-  const { navigateTo } = useSavFile();
 
   const handleExpand = () => {
     setExpanded(!expanded);
   };
+
+  useEffect(() => {
+    currentFolder?.path.includes(folder.path) && setExpanded(true);
+  }, [currentFolder]);
 
   const handleSelect = () => {
     navigateTo(folder.path);
