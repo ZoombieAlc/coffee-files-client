@@ -1,4 +1,5 @@
 import { FileProvider, ClipboardProvider } from "./contexts";
+import SelectedFileProvider from "./contexts/SelectedFile";
 import ItemPanel from "./components/organisms/itemPanel";
 import TextEditor from "./components/organisms/textEditor";
 import ToolBar from "./components/organisms/toolBar";
@@ -8,6 +9,7 @@ import MainRouter from "./routers";
 function App() {
   return (
     <MainRouter>
+      <SelectedFileProvider>
       <FileProvider>
         <ClipboardProvider>
         <div className="flex h-screen w-screen bg-wallpaper1">
@@ -29,6 +31,7 @@ function App() {
           </div>
           </ClipboardProvider>
         </FileProvider>
+        </SelectedFileProvider>
     </MainRouter>
   );
 }

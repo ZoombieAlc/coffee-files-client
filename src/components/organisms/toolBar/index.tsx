@@ -10,17 +10,16 @@ import { PencilIcon } from "@heroicons/react/24/outline";
 import { ClipboardDocumentIcon } from "@heroicons/react/24/outline";
 import useSavFile from "../../../hooks/useSavFile";
 import { useClipboardContext } from "../../../contexts";
+import { useSelectedFileContext } from "../../../hooks/useSelectedFile";
 
 function ToolBar() {
   const { currentFolder, syncSystem, navigateTo } = useSavFile();
   const {
-    clipboardFiles,
-    clipboardFolders,
     copyFilesAndFolders,
     cutFilesAndFolders,
     pasteFilesAndFolders,
-    isCut,
   } = useClipboardContext();
+  const { files: selectedFiles, folders: selectedFolders } = useSelectedFileContext();
 
   const handleSync = () => {
     syncSystem();
@@ -32,11 +31,11 @@ function ToolBar() {
   };
 
   const handleCopy = () => {
-    copyFilesAndFolders(clipboardFiles, clipboardFolders);
+    copyFilesAndFolders(selectedFiles, selectedFolders);
   };
 
   const handleCut = () => {
-    cutFilesAndFolders(clipboardFiles, clipboardFolders);
+    cutFilesAndFolders(selectedFiles, selectedFolders);
   };
 
   const handlePaste = () => {

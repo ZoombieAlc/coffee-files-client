@@ -8,7 +8,7 @@ type SelectedFileType = {
   setFolders: React.Dispatch<React.SetStateAction<Folder[]>>;
 };
 
-const SelectedFileContext = createContext<SelectedFileType | null>(null);
+export const SelectedFileContext = createContext<SelectedFileType | null>(null);
 
 function SelectedFileProvider({ children }: { children: React.ReactNode }) {
   const [files, setFiles] = useState<File[]>([]);
@@ -28,7 +28,4 @@ function SelectedFileProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default {
-  SelectedFileContext,
-  SelectedFileProvider,
-};
+export default SelectedFileProvider;
