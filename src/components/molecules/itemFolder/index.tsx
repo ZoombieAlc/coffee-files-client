@@ -2,6 +2,7 @@ import { FolderIcon } from "@heroicons/react/16/solid";
 import { Folder } from "../../../types";
 import { useDroppable } from "@dnd-kit/core";
 import { joinPath } from "../../../utils";
+import useSavFile from "../../../hooks/useSavFile";
 
 type ItemFolderProps = {
   item: Folder;
@@ -15,9 +16,15 @@ const formatDate = (timestamp: number) => {
 };
 
 function ItemFolder({ item, isSelected, onClick }: ItemFolderProps) {
+  const { navigateTo } = useSavFile();
+
   const { isOver, setNodeRef } = useDroppable({
     id: joinPath(item.path, item.name),
   });
+
+  const handleNavigate = () => {
+    navigateTo(item.path);
+  };
 
   return (
     <div
@@ -28,7 +35,7 @@ function ItemFolder({ item, isSelected, onClick }: ItemFolderProps) {
       data-id={joinPath(item.path, item.name)}
       onClick={(e) => onClick(e, item.path)}
     >
-      <div className="flex items-center">
+      <div className="flex items-center" onClick={handleNavigate}>
         <FolderIcon className="w-6 h-6 text-coffee_text_pale_blue select-none" />
         <p className="ml-2 text-coffee_text_pale_blue select-none">
           {item.name}
