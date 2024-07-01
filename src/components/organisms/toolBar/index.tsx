@@ -11,6 +11,7 @@ import { PencilIcon } from "@heroicons/react/24/outline";
 import { ClipboardDocumentIcon } from "@heroicons/react/24/outline";
 import useSavFile from "../../../hooks/useSavFile";
 
+
 function ToolBar() {
   const { currentFolder, syncSystem, navigateTo } = useSavFile();
 
@@ -22,6 +23,7 @@ function ToolBar() {
     if (currentFolder?.path.split("\\").length === 1) return;
     navigateTo(currentFolder?.path.split("\\").slice(0, -1).join("\\") ?? "");
   };
+
 
   return (
     <div className="m-2 p-2 bg-coffee_violet_darker w-full flex flex-col rounded-md gap-2 font-inter text-coffee_text_pale_blue">
@@ -38,19 +40,19 @@ function ToolBar() {
             <p>Delete</p>
           </div>
         </button>
-        <button>
+        <button >
           <div className="flex flex-col items-center">
             <DocumentDuplicateIcon className="w-6" />
             <p>Copy</p>
           </div>
         </button>
-        <button>
+        <button >
           <div className="flex flex-col items-center">
             <ScissorsIcon className="w-6" />
             <p>Cut</p>
           </div>
         </button>
-        <button>
+        <button >
           <div className="flex flex-col items-center">
             <ClipboardDocumentIcon className="w-6" />
             <p>Paste</p>

@@ -9,6 +9,7 @@ type SavFileHook = {
   navigateTo: (path: string) => void;
   setSav: (sav: Sav) => void;
   syncSystem: () => void;
+  
 };
 
 export default function useSavFile(): SavFileHook {
